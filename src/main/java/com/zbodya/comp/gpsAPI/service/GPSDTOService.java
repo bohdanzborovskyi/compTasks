@@ -31,7 +31,6 @@ public class GPSDTOService
 
     public boolean validateGPSData(long deviceID, long latitude, long longitude)
     {
-        System.out.println("validate");
         return deviceID > 0 && latitude > 0 && longitude > 0;
     }
 }

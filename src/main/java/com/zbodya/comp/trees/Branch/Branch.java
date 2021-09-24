@@ -1,18 +1,25 @@
 package com.zbodya.comp.trees.Branch;
 
-import com.zbodya.comp.trees.Leave.Leave;
+import com.zbodya.comp.trees.Leaf.Leaf;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-abstract public class Branch <L extends Leave>
+@NoArgsConstructor
+@AllArgsConstructor
+abstract public class Branch <L extends Leaf>
 {
-    private String branch;
-    public Branch(String branch)
+    protected List<L> leaves;
+    protected String branchName;
+    public Branch(String branchName)
     {
-        this.branch = branch;
+        this.branchName = branchName;
+        this.leaves = new ArrayList<>();
     }
-    abstract public void addLeave(L leave);
+    abstract public void addLeaf(L leaf);
 
 }

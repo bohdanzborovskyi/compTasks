@@ -1,30 +1,17 @@
 package com.zbodya.comp.trees.Branch;
 
-import com.zbodya.comp.trees.Leave.SimpleLeave;
+import com.zbodya.comp.trees.Leaf.SimpleLeaf;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class DeciduousBranch extends Branch<SimpleLeave>
+public class DeciduousBranch extends Branch<SimpleLeaf>
 {
-    private List<SimpleLeave> leaves;
-
     public DeciduousBranch(String branch) {
         super(branch);
-        this.leaves = new ArrayList<>();
-    }
-
-    public List<SimpleLeave> getLeaves() {
-        return leaves;
-    }
-
-    public void setLeaves(List<SimpleLeave> leaves) {
-        this.leaves = leaves;
     }
 
     @Override
-    public void addLeave(SimpleLeave leave)
+    public void addLeaf(SimpleLeaf leaf)
     {
-        this.leaves.add((leave));
+        this.leaves.add((leaf));
     }
 }
