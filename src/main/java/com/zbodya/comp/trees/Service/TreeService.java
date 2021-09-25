@@ -31,14 +31,12 @@ public class TreeService
             DeciduousBranch decidousBranch = new DeciduousBranch("Deciduous branch" + i);
             for(int j=0; j<20; j++)
             {
-                SimpleLeaf simpleLeaf = new SimpleLeaf("Simple leave" + j);
-                decidousBranch.addLeaf(simpleLeaf);
+                decidousBranch.addLeaf(new SimpleLeaf("Simple leave" + j));
             }
             NeedleBranch neddleBranch = new NeedleBranch("Needle branch" + i);
             for(int j=0; j<20; j++)
             {
-                NeedleLeaf needleLeaf = new NeedleLeaf("Needle leave" + j);
-                neddleBranch.addLeaf(needleLeaf);
+                neddleBranch.addLeaf(new NeedleLeaf("Needle leave" + j));
             }
             needleTree.addBranch(neddleBranch);
             deciduousTree.addBranch(decidousBranch);

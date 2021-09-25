@@ -1,6 +1,7 @@
 package com.zbodya.comp.gpsAPI.service;
 
 import com.zbodya.comp.gpsAPI.model.GPSDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class GPSDTOService
 {
     private Set<GPSDTO> gpsDB = new HashSet<>();
@@ -16,7 +18,7 @@ public class GPSDTOService
     public void addToGpsDB(GPSDTO gps)
     {
         this.gpsDB.add(gps);
-        System.out.println("Device ID: " + gps.getDeviceID() + ", latitude: " + gps.getLatitude() + ", longitude: " + gps.getLongitude());
+        log.info("Device ID: " + gps.getDeviceID() + ", latitude: " + gps.getLatitude() + ", longitude: " + gps.getLongitude());
     }
 
     public Optional<GPSDTO> getByDeviceID(long deviceID)
@@ -27,10 +29,5 @@ public class GPSDTOService
     public Set<GPSDTO> getAll()
     {
         return this.gpsDB;
-    }
-
-    public boolean validateGPSData(long deviceID, long latitude, long longitude)
-    {
-        return deviceID > 0 && latitude > 0 && longitude > 0;
     }
 }

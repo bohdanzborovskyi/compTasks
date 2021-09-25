@@ -23,8 +23,7 @@ public class DeciduousTree extends Tree<DeciduousBranch>
         DeciduousBranch branch = new DeciduousBranch("Grown deciduous branch ");
         for(int i=0; i<20; i++)
         {
-            SimpleLeaf simpleLeaf = new SimpleLeaf("Grown simple leave" + i);
-            branch.addLeaf(simpleLeaf);
+            branch.addLeaf(new SimpleLeaf("Grown simple leave" + i));
         }
         this.branches.add(branch);
     }
@@ -32,26 +31,13 @@ public class DeciduousTree extends Tree<DeciduousBranch>
     @Override
     public void cutDown()
     {
-        for(DeciduousBranch branch : this.branches)
-        {
-            for(SimpleLeaf leave : branch.getLeaves())
-            {
-                branch.getLeaves().remove(leave);
-            }
-            this.branches.remove(branch);
-        }
+        this.branches.stream().forEach(deciduousBranch -> deciduousBranch.getLeaves().clear());
         this.branches = null;
     }
 
     @Override
     public void dryUp()
     {
-        for(DeciduousBranch branch : this.branches)
-        {
-            for(int i=0; i<branch.getLeaves().size(); i++)
-            {
-                branch.getLeaves().remove(i);
-            }
-        }
+        this.branches.stream().forEach(deciduousBranch -> deciduousBranch.getLeaves().clear());
     }
 }

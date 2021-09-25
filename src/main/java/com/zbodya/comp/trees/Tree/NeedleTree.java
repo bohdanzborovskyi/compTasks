@@ -22,8 +22,7 @@ public class NeedleTree extends Tree<NeedleBranch>
         NeedleBranch needleBranch = new NeedleBranch("Grown needle branch");
         for(int i=0; i<20; i++)
         {
-            NeedleLeaf needleLeaf = new NeedleLeaf("Grown needle leave" + i);
-            needleBranch.addLeaf(needleLeaf);
+            needleBranch.addLeaf(new NeedleLeaf("Grown needle leave" + i));
         }
         this.branches.add(needleBranch);
     }
@@ -31,26 +30,13 @@ public class NeedleTree extends Tree<NeedleBranch>
     @Override
     public void cutDown()
     {
-        for(NeedleBranch branch : this.branches)
-        {
-            for(NeedleLeaf leave : branch.getLeaves())
-            {
-                branch.getLeaves().remove(leave);
-            }
-            this.branches.remove(branch);
-        }
+        this.branches.stream().forEach(needleBranch -> needleBranch.getLeaves().clear());
         this.branches = null;
     }
 
     @Override
     public void dryUp()
     {
-        for(NeedleBranch branch : this.branches)
-        {
-            for(int i=0; i<branch.getLeaves().size(); i++)
-            {
-                branch.getLeaves().remove(i);
-            }
-        }
+        this.branches.stream().forEach(needleBranch -> needleBranch.getLeaves().clear());
     }
 }

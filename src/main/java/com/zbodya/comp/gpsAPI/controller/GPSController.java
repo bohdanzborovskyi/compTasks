@@ -2,6 +2,7 @@ package com.zbodya.comp.gpsAPI.controller;
 
 import com.zbodya.comp.gpsAPI.model.GPSDTO;
 import com.zbodya.comp.gpsAPI.service.GPSDTOService;
+import com.zbodya.comp.gpsAPI.service.GPSDTOValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,23 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("gpsAPI/")
-public class GPSAPI
+@RequestMapping("saveGPS")
+public class GPSController
 {
+    private final GPSDTOService gpsdtoService;
+    private final GPSDTOValidator gpsdtoValidator;
 
     @Autowired
-    GPSDTOService gpsdtoService;
+    public GPSController(GPSDTOService gpsdtoService,GPSDTOValidator gpsdtoValidator) {
+        this.gpsdtoService = gpsdtoService;
+        this.gpsdtoValidator = gpsdtoValidator;
+    }
 
-    @PostMapping("/saveGPS")
+    @PostMapping
     ResponseEntity<String> saveGPSData(@RequestParam("deviceID")String deviceID, @RequestParam("latitude")String latitude, @RequestParam("longitude")String longitude)
     {
-        System.out.println("GPS API");
-        long devID = Long.parseLong(deviceID);
-        long lati = Long.parseLong(latitude);
-        long longi = Long.parseLong(longitude);
-        if(gpsdtoService.validateGPSData(devID,lati,longi))
+        if(gpsdtoValidator.validateGPSData(latitude,longitude,deviceID))
         {
-            gpsdtoService.addToGpsDB(new GPSDTO(devID, lati, longi));
+            gpsdtoService.addToGpsDB(new GPSDTO(Long.parseLong(deviceID),Long.parseLong(latitude),Long.parseLong(longitude)));
             return new ResponseEntity<>("GPS Data was successfully saved", HttpStatus.OK);
         }
         else
